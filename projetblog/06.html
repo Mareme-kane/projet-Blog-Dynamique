@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="06.css" />
+    <title>Blog dynamique</title>
+  </head>
+  <body>
+    <nav id="navbar" class="navbar">
+      <a href="#" class="navbar-brand">Mon Blog</a>
+      <div class="navbar-links">
+        <a href="#">Accueil</a>
+        <a href="#">Articles</a>
+        <a href="#">À propos</a>
+        <a href="#" id="toggleDarkMode">Mode Sombre</a>
+      </div>
+    </nav>
+    <h1 class="titre">c'est votre Blog,<br />votre chez vous</h1>
+
+    <div class="section1">
+      <div class="container">
+        <div class="im1">
+          <a href="#"
+            ><img
+              src="./imagebl/vetement.jpg"
+              alt=""
+              width="250px"
+              height="250px"
+          /></a>
+          <div class="btn-container">
+            <button class="btn" onclick="openSec1()">cliquer ici</button>
+          </div>
+          <p class="modif">Des vetements chics et pas chers</p>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="im2">
+          <a href="#"
+            ><img
+              src="./imagebl/chaussure.jpg"
+              alt=""
+              width="250px"
+              height="250px"
+          /></a>
+          <div class="btn-container">
+            <button class="btn pousser" onclick="openSec1()">
+              cliquer ici
+            </button>
+          </div>
+          <p class="modif">Des chaussures confortables</p>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="im3">
+          <a href="#"
+            ><img src="./imagebl/voile.jpg" alt="" width="250px" height="250px"
+          /></a>
+          <div class="btn-container">
+            <button class="btn pousse" onclick="openSec1()">cliquer ici</button>
+          </div>
+          <p class="modif">Des voiles pour les oukhty</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="general">
+      <div class="container1">
+        <div class="sec1" id="sec1">
+          <div class="commentairesContainer"></div>
+          <form action="#" method="post" id="monFormulaire">
+            <label for="commentaire">Commentaire:</label>
+            <textarea id="commentaire" name="commentaire" required></textarea>
+            <button type="submit">Valider</button>
+          </form>
+          <button onclick="closeSec1()">ok</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Popup
+      function openSec1(index) {
+        let sec1 = document.getElementById(`sec1-${index}`);
+        sec1.classList.add("open-sec1");
+      }
+
+      function closeSec1(index) {
+        let sec1 = document.getElementById(`sec1-${index}`);
+        sec1.classList.remove("open-sec1");
+      }
+
+      // Dark mode
+      document.addEventListener("DOMContentLoaded", function () {
+        const toggleDarkMode = document.getElementById("toggleDarkMode");
+        const body = document.body;
+
+        toggleDarkMode.addEventListener("click", function () {
+          body.classList.toggle("dark-mode");
+        });
+      });
+
+      // Commentaires
+      document.addEventListener("DOMContentLoaded", function () {
+        document
+          .querySelectorAll(".monFormulaire")
+          .forEach(function (formulaire, index) {
+            formulaire.addEventListener("submit", function (event) {
+              event.preventDefault();
+
+              let commentaire = formulaire.querySelector(".commentaire").value;
+              let commentairesContainer = document.querySelector(
+                `#sec1-${index} .commentairesContainer`
+              );
+
+              commentairesContainer.innerHTML += `<p>${commentaire}</p>`;
+            });
+          });
+      });
+    </script>
+  </body>
+</html>
